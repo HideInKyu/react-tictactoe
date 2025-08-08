@@ -78,3 +78,80 @@ body {
 .resultBox button:hover {
   background-color: #62aeff;
 }
+
+.homeScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  width: 65vw;
+  padding: 2rem 3rem;
+  /* From https://css.glass */
+  background: rgba(161, 197, 255, 0.324);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.create {
+  width: 100%;
+}
+
+.join {
+  width: 100%;
+}
+
+.playerName {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.homeScreen h1 {
+  margin: 0;
+}
+
+.homeScreen label {
+  font-size: 1.5rem;
+}
+
+.homeScreen input {
+  width: 50%;
+  font-size: 2rem;
+  border-radius: 6px;
+  height: 2.55rem;
+}
+
+.homeScreen button {
+  font-size: 1.5rem;
+  height: 3rem;
+  border-radius: 8px;
+  background-color: #2f8ef3;
+  color: white;
+  cursor: pointer;
+  border: 3px solid #2b86e6;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+.homeScreen button:hover {
+  background-color: #62aeff;
+}
+
+.choice {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
