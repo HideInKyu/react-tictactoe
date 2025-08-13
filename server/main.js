@@ -40,15 +40,13 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("playX", ({ XO, index, roomNumber }) => {
-    const turn = 1;
-    console.log(`Player X played at index ${index} in room ${roomNumber}`);
-    socket.to(roomNumber).emit("playX", { turn, XO, index });
+  socket.on("xMove", ({ id, roomNumber }) => {
+    console.log(`Move made in room "${roomNumber}" at box ${id}`);
+    socket.to(roomNumber).emit("xMove", { id });
   });
 
-  socket.on("playO", ({ XO, index, roomNumber }) => {
-    const turn = 0;
-    console.log(`Player O played at index ${index} in room ${roomNumber}`);
-    socket.to(roomNumber).emit("playO", { turn, XO, index });
-  });
+  socket.on("oMove", ({ id, roomNumber }) => {
+    console.log(`Move made in room "${roomNumber}" at box ${id}`);
+    socket.to(roomNumber).emit("oMove", { id });
+  }); 
 });
