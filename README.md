@@ -51,7 +51,7 @@ The project is organized into a `client` directory and a `server` directory.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/HideInKyu/react-tictactoe.git
     cd tic-tac-toe
     ```
 2.  **Install server dependencies:**
