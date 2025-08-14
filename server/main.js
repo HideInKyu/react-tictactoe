@@ -1,14 +1,18 @@
 const express = require("express");
 const http = require("http");
-
+const { Server } = require("socket.io");
+const cors = require("cors");
 const app = express();
 const server = http.createServer(app);
 
+app.use(cors());
+
 const PORT = process.env.PORT || 3000;
 
-const io = require("socket.io")(3000, {
+const io = new Server(server, {
   cors: {
-    origin: "iridescent-bublanina-965e58.netlify.app",
+    origin: "https://iridescent-bublanina-965e58.netlify.app",
+    methods: ["GET", "POST"],
   },
 });
 
@@ -43,10 +47,18 @@ io.on("connection", (socket) => {
         const player1 = rooms[roomId][0];
         const player2 = rooms[roomId][1];
 
-        console.log(`Emitting opponentInfo to ${player1.playerName} (${player1.socketId}) with opponent: ${player2.playerName}`);
-        io.to(player1.socketId).emit("opponentInfo", { opponentName: player2.playerName });
-        console.log(`Emitting opponentInfo to ${player2.playerName} (${player2.socketId}) with opponent: ${player1.playerName}`);
-        io.to(player2.socketId).emit("opponentInfo", { opponentName: player1.playerName });
+        console.log(
+          `Emitting opponentInfo to ${player1.playerName} (${player1.socketId}) with opponent: ${player2.playerName}`,
+        );
+        io.to(player1.socketId).emit("opponentInfo", {
+          opponentName: player2.playerName,
+        });
+        console.log(
+          `Emitting opponentInfo to ${player2.playerName} (${player2.socketId}) with opponent: ${player1.playerName}`,
+        );
+        io.to(player2.socketId).emit("opponentInfo", {
+          opponentName: player1.playerName,
+        });
       }
 
       socket.to(roomId).emit("playerJoined", {
@@ -82,12 +94,14 @@ io.on("connection", (socket) => {
     console.log("Client disconnected:", socket.id);
     // Find the room the disconnected socket was in and remove them
     for (const roomId in rooms) {
-      rooms[roomId] = rooms[roomId].filter(player => player.socketId !== socket.id);
+      rooms[roomId] = rooms[roomId].filter(
+        (player) => player.socketId !== socket.id,
+      );
       if (rooms[roomId].length === 0) {
         delete rooms[roomId]; // Delete room if empty
       }
     }
-  }); 
+  });
 });
 
 server.listen(PORT, () => {
