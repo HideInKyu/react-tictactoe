@@ -1,6 +1,14 @@
+const express = require("express");
+const http = require("http");
+
+const app = express();
+const server = http.createServer(app);
+
+const PORT = process.env.PORT || 3000;
+
 const io = require("socket.io")(3000, {
   cors: {
-    origin: "*",
+    origin: "iridescent-bublanina-965e58.netlify.app",
   },
 });
 
@@ -80,4 +88,8 @@ io.on("connection", (socket) => {
       }
     }
   }); 
+});
+
+server.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
 });
